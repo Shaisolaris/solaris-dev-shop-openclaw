@@ -1,0 +1,16 @@
+{
+  "name": "solaris-openclaw",
+  "owner": {
+    "name": "Solaris Technologies"
+  },
+  "plugins": [
+    {
+      "name": "solaris-dev-shop",
+      "description": "61 specialist workflows and one chief-of-staff coordinator, with contained Python helpers.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Shaisolaris/solaris-dev-shop-openclaw/archive/69a8e120ee2b2c53f19533ab9bba73c1dcef8ebf.zip"
+      }
+    }
+  ]
+}

@@ -1,15 +1,15 @@
-# Native installation and validation
-
-This is the complete Solaris Dev Shop native source plugin for OpenClaw2026.10.5:61 specialist workflows plus a chief-of-staff coordinator, with actual deterministic intake through the native CLI.
+# Native OpenClaw0.64.0 installation
 
 ```sh
-openclaw plugins install git:github.com/Shaisolaris/solaris-dev-shop-openclaw@4c74fbeb48f7356af8bf510918bb0684cb4b9c31
+openclaw plugins install git:github.com/Shaisolaris/solaris-dev-shop-openclaw@9194a847a32ffd86f31946da152cde1ad9b0cfdf
 openclaw plugins enable solaris-dev-shop
 openclaw solaris intake 'review this code' --json
 ```
 
-Review the source and declared skill/CLI surfaces in OpenClaw's normal install prompt. Python3.10+ must be available as `python3` onPATH. Intake returns a bounded assignment and does not execute specialist work. The native adapter uses argument separation, no shell, a32KiB input cap,20second timeout and a minimal child environment. There are no MCP servers, hooks, schedules, credential sources or model calls. Host permissions and role prerequisites apply.
+Use the normal reviewed-source confirmation. This exact package preserves61 specialists plus the coordinator,1,197 canonical files and1,975 complete profile files/modes. Native OpenClaw2026.10.5 local install, enable,62 visible workflows,62 helper contexts, composite provenance and actual intake/input-control outcomes pass. Public Git and final registry publication are separate gates recorded with their exact revisions.
 
-The immutable source is [reviewed distributionc69fbcf](https://github.com/Shaisolaris/solaris-dev-shop-plugins/commit/c69fbcf49e46da3837fcf75420b9914705b2eab7), profile `harnesses/openclaw`. All1196 canonical files are preserved. Both independent source review and [exact-revision Linux CI](https://github.com/Shaisolaris/solaris-dev-shop-plugins/actions/runs/39795129169) pass, including actual OpenClaw install, command invocation and62 visible skills; separate macOS native checks cover shell-text/option-like-input handling, oversized refusal and complete installed source/modes. These checks are not a claim of vulnerability-free code or model quality.
+The CLI returns an assignment; it does not execute specialist work. It uses execFile, argument separation, a32KiB UTF8 cap,20second timeout and a minimal child environment. No model calls, MCP servers, hooks, schedules or new account grants are declared. Python3.10+ and normal host permissions apply.
 
-This Git distribution is public. ClawHub registry publication/review is separate and remains pending publisher authentication. No version was bumped for this distribution work; existing tags/releases are preserved. MIT licensed. Solaris Technologies, https://solaristek.com.
+The ClawHub catalog icon now fits512KiB by lossless compression, preserving every original1254x1254RGBA pixel and colour metadata. The old0.63 registry release and tags remain immutable; its Review advisory is historical and is not silently cleared. The corrected native input is 2e51c951ce4573c0ab7c5cc807118d6e0c5b815c, harnesses/openclaw. Current registry status must be checked independently; source publication does not claim curator approval or absence of all vulnerabilities.
+
+Solaris Technologies, https://solaristek.com. MIT licensed.

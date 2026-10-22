@@ -1,0 +1,11 @@
+{
+  "sourceRepository": "https://github.com/Shaisolaris/solaris-dev-shop-plugins",
+  "sourceRevision": "0dcda5817286dcca4abd911a6d2b2292a17715cc",
+  "sourcePath": "harnesses/openclaw",
+  "profileFiles": 1973,
+  "canonicalFiles": 1196,
+  "specialists": 61,
+  "coordinator": 1,
+  "newCoreEmployeeCapabilities": 0,
+  "nativeHostIntegration": "solaris intake CLI; deterministic assignment only"
+}

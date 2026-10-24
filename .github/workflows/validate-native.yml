@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: Shaisolaris/solaris-dev-shop-plugins
-          ref: 83fcb4fe0738bb4fed75716c4ec85340822a74bd
+          ref: 10dbf16811c40735955ba425b77a661c0dd0e973
           path: distribution
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -30,7 +30,7 @@ jobs:
           python - <<'PY'
           import io,json,hashlib,subprocess,tarfile
           from pathlib import Path
-          ref='83fcb4fe0738bb4fed75716c4ec85340822a74bd'
+          ref='10dbf16811c40735955ba425b77a661c0dd0e973'
           root=Path('published');expected=set()
           with tarfile.open(fileobj=io.BytesIO(subprocess.check_output(['git','-C','distribution','archive',ref+':harnesses/openclaw']))) as t:
               for member in t:

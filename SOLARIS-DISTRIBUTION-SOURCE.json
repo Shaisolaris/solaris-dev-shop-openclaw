@@ -1,9 +1,9 @@
 {
   "sourceRepository": "https://github.com/Shaisolaris/solaris-dev-shop-plugins",
-  "sourceRevision": "83fcb4fe0738bb4fed75716c4ec85340822a74bd",
+  "sourceRevision": "10dbf16811c40735955ba425b77a661c0dd0e973",
   "sourcePath": "harnesses/openclaw",
-  "profileFiles": 1978,
-  "canonicalFiles": 1199,
+  "profileFiles": 1979,
+  "canonicalFiles": 1200,
   "specialists": 61,
   "coordinator": 1,
   "newCoreEmployeeCapabilities": 0,

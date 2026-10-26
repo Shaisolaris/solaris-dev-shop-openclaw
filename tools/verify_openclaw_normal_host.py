@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Normal OpenClaw installation and refusal recovery in a new private profile.
 
-Answers only the exact first-party local-source prompt once. Security-policy
-warnings and other prompts receive no automatic answer. No force flags.
+Answers the exact first-party source and pinned-declaration prompts once each.
+Security-policy warnings and other prompts receive no answer. No force flags.
 """
 import argparse
 import errno
@@ -17,6 +17,46 @@ import sys
 import time
 
 CORE = 'c7c9b395795f488dd3c48122ff916970438b67e6'
+CAPABILITY_QUESTION = b'Accept these capabilities and install "solaris-dev-shop"?'
+
+def validate_capability_declaration(output):
+    text = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]','',output.decode(errors='replace'))
+    start = text.rfind('Plugin capabilities require approval:')
+    end = text.find(CAPABILITY_QUESTION.decode(),start)
+    assert start >= 0 and end >= start, 'Missing native capability declaration'
+    lines = [line.strip() for line in text[start:end].splitlines() if line.strip()]
+    assert lines == [
+        'Plugin capabilities require approval: Solaris Dev Shop (solaris-dev-shop) @ 0.68.0',
+        'Source: path',
+        'CLI commands: solaris',
+        'Skills: ./skills',
+        'Prompt injection: allowed',
+        'Conversation access: denied',
+    ], 'Unexpected capability declaration: '+repr(lines)
+
+def consent_controls():
+    # Golden declaration captured from the actual official client's local run.
+    original = b'''Plugin capabilities require approval: Solaris Dev Shop (solaris-dev-shop) @ 0.68.0
+Source: path
+CLI commands: solaris
+Skills: ./skills
+Prompt injection: allowed
+Conversation access: denied
+Accept these capabilities and install "solaris-dev-shop"? [y/N] '''
+    validate_capability_declaration(original)
+    cases = [
+        ('conversation access widened',original.replace(b'Conversation access: denied',b'Conversation access: allowed')),
+        ('unexpected CLI',original.replace(b'CLI commands: solaris',b'CLI commands: solaris, shell')),
+        ('additional tool grant',original.replace(b'Skills: ./skills',b'Skills: ./skills\nTools: shell')),
+        ('different plugin version',original.replace(b'@ 0.68.0',b'@ 0.69.0')),
+    ]
+    for label,changed in cases:
+        try:
+            validate_capability_declaration(changed)
+        except AssertionError:
+            continue
+        raise AssertionError('False consent acceptance: '+label)
+    return len(cases)
 
 def inventory(root):
     result = {}
@@ -33,6 +73,7 @@ def install(command, work, env):
     os.close(slave)
     output = bytearray()
     answered = False
+    capabilities_answered = False
     prompt = b'Install this non-ClawHub plugin source?'
     deadline = time.monotonic()+180
     try:
@@ -55,11 +96,17 @@ def install(command, work, env):
                 if not answered and prompt in output:
                     os.write(master,b'y\n')
                     answered = True
+                if not capabilities_answered and CAPABILITY_QUESTION in output:
+                    assert answered, 'Capability consent preceded source consent'
+                    validate_capability_declaration(output)
+                    os.write(master,b'y\n')
+                    capabilities_answered = True
             elif process.poll() is not None:
                 break
         assert process.wait(timeout=10) == 0, 'Normal install failed: '+output.decode(errors='replace')[-8000:]
         assert answered, 'Expected explicit local-source consent was not observed'
         assert output.count(prompt) == 1, 'Unexpected repeated confirmation prompt'
+        assert capabilities_answered and output.count(CAPABILITY_QUESTION) == 1, 'Missing or repeated capability consent'
     finally:
         if process.poll() is None:
             process.terminate()
@@ -83,6 +130,9 @@ def main():
     manifest = json.loads((profile/'openclaw.plugin.json').read_text())
     assert manifest['version'] == '0.68.0' and manifest['id'] == 'solaris-dev-shop'
     assert not manifest.get('capabilities')
+    assert [row['name'] for row in manifest['cliCommands']] == ['solaris']
+    assert manifest['skills'] == ['./skills']
+    consent_rejections = consent_controls()
     work.mkdir(parents=True,exist_ok=False)
     home = work/'home'
     home.mkdir()
@@ -125,6 +175,8 @@ def main():
     result = {'host':'OpenClaw2026.10.5','version':'0.68.0','sourceCore':CORE,
               'installedFilesAndModes':1335,'actualModelVisibleWorkflows':62,
               'normalSourcePromptAnsweredOnce':True,'forceUsed':False,'capabilityOverrideUsed':False,
+              'normalPinnedCapabilityConsentAnsweredOnce':True,'unauthorizedDeclarationRejections':consent_rejections,
+              'acceptedDeclaredCLI':['solaris'],'acceptedDeclaredSkills':['./skills'],'conversationAccess':False,
               'shellLikeInputRemainedData':True,'oversizeRefused':True,'legitimateUseAfterRefusal':True,
               'modelCommandsIssued':0,'modelUsageMetered':False,'ownerProfileAccess':False,
               'marketplaceAdmission':False,'pass':True}

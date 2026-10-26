@@ -1,12 +1,25 @@
 {
   "sourceRepository": "https://github.com/Shaisolaris/solaris-dev-shop-plugins",
-  "sourceRevision": "10dbf16811c40735955ba425b77a661c0dd0e973",
+  "sourceRevision": "2c11999a1a13912fbb694228b176bc4ebb5f165e",
   "sourcePath": "harnesses/openclaw",
-  "profileFiles": 1979,
-  "canonicalFiles": 1200,
+  "profileFiles": 1335,
+  "canonicalFiles": 1201,
   "specialists": 61,
   "coordinator": 1,
   "newCoreEmployeeCapabilities": 0,
-  "nativeHostIntegration": "solaris intake CLI; deterministic assignment only",
-  "notice": "Original canonical notice retained; resource license alias credited; source CI stored as inert data."
+  "submittedArtifactSHA256": "be62057b059fa024e9153f7389030220bb9415571e5c358c8929c70c38f7c852",
+  "publishingAllowed": false,
+  "ClawHubRequiredScanComplete": false,
+  "previous066Source": {
+    "sourceRepository": "https://github.com/Shaisolaris/solaris-dev-shop-plugins",
+    "sourceRevision": "10dbf16811c40735955ba425b77a661c0dd0e973",
+    "sourcePath": "harnesses/openclaw",
+    "profileFiles": 1979,
+    "canonicalFiles": 1200,
+    "specialists": 61,
+    "coordinator": 1,
+    "newCoreEmployeeCapabilities": 0,
+    "nativeHostIntegration": "solaris intake CLI; deterministic assignment only",
+    "notice": "Original canonical notice retained; resource license alias credited; source CI stored as inert data."
+  }
 }

@@ -1,7 +1,9 @@
-# Solaris Dev Shop openclaw0.66.0 candidate
+# Solaris Dev Shop for OpenClaw — 0.68.0 candidate
 
-Complete61 specialist workflows plus coordinator. Source: https://github.com/Shaisolaris/solaris-dev-shop-plugins/tree/10dbf16811c40735955ba425b77a661c0dd0e973/harnesses/openclaw. All 1978 profile files/modes match that source, retaining1,200 canonical hashes. Native CI verifies the actual client installation before release; prior0.65 results are historical, not relabeled as current runs.
+61 specialists and Chief of Staff: 62 workflows. Complete native profile: 1,335 files including all 1,201 canonical core files. This is the exact source tree already submitted to ClawHub, not a reduced companion. Shared skills resolve their retained canonical helpers without duplicate source copies.
 
-Install the whole package through the normal host plugin manager at an exact reviewed public commit. Python3.10+ and host permissions apply. Local routing returns an assignment; it does not execute specialist work or prove output correctness. No added account grants, MCP server, model/provider changes, automatic lifecycle hooks or background schedule. The full package retains privileged optional workflows that require the operator’s appropriate tools and permissions.
+Source: https://github.com/Shaisolaris/solaris-dev-shop-plugins/tree/2c11999a1a13912fbb694228b176bc4ebb5f165e/harnesses/openclaw. Repository-only CI, marketplace discovery and provenance notes sit outside the submitted profile.
 
-Marketplace availability, registry publication and vendor approval are separate. ClawHub’s prior advisory is not cleared by source preparation. No prior release tag or asset is rewritten. Solaris Technologies, https://solaristek.com. MIT licensed.
+Required ClawHub semantic scanning and admission are incomplete. This review branch is not a live marketplace listing. Native CI must use normal interactive source confirmation in a fresh isolated profile; no force, security-policy overrides, automatic updates or model requests. Local intake returns a bounded assignment and does not execute specialist work. Optional workflow prerequisites and host permissions remain authoritative.
+
+Solaris Technologies — https://solaristek.com. MIT licensed. Existing release history is unchanged.

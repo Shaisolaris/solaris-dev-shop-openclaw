@@ -38,7 +38,7 @@ def install(command, work, env):
     try:
         while True:
             if time.monotonic() > deadline:
-                raise TimeoutError('Normal source installation did not complete')
+                raise TimeoutError('Normal source installation did not complete: '+output.decode(errors='replace')[-8000:])
             readable,_,_ = select.select([master],[],[],0.2)
             if readable:
                 try:
@@ -50,6 +50,8 @@ def install(command, work, env):
                 if not chunk:
                     break
                 output.extend(chunk)
+                with (work/'install.log').open('ab') as captured:
+                    captured.write(chunk)
                 if not answered and prompt in output:
                     os.write(master,b'y\n')
                     answered = True

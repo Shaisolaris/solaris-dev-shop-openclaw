@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import pty
+import re
 import select
 import subprocess
 import sys
@@ -54,7 +55,7 @@ def install(command, work, env):
                     answered = True
             elif process.poll() is not None:
                 break
-        assert process.wait(timeout=10) == 0, 'Normal install failed; inspect preserved log'
+        assert process.wait(timeout=10) == 0, 'Normal install failed: '+output.decode(errors='replace')[-8000:]
         assert answered, 'Expected explicit local-source consent was not observed'
         assert output.count(prompt) == 1, 'Unexpected repeated confirmation prompt'
     finally:
@@ -94,9 +95,11 @@ def main():
         result = subprocess.run(command+arguments,cwd=work,env=env,capture_output=True,text=True,timeout=60)
         (work/(label+'.stdout')).write_text(result.stdout)
         (work/(label+'.stderr')).write_text(result.stderr)
-        assert (result.returncode == 0) is success, label
+        assert (result.returncode == 0) is success, label+': '+repr(result.stdout[-2000:])+repr(result.stderr[-2000:])
         return result.stdout
-    assert run(['--version'],'version').strip() == '2026.10.5'
+    assert json.loads((cli.parent/'package.json').read_text())['version'] == '2026.10.5'
+    reported_version = run(['--version'],'version').strip()
+    assert re.fullmatch(r'OpenClaw 2026\.10\.5 \([0-9a-f]{7,40}\)',reported_version), repr(reported_version)
     install(command+['plugins','install',str(profile)],work,env)
     run(['plugins','enable','solaris-dev-shop'],'enable')
     installed = work/'state/extensions/solaris-dev-shop'
